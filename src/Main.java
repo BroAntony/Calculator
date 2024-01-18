@@ -29,9 +29,11 @@ public class Main {
 
 
         } catch (Exception e) {
-            //throw new RuntimeException(e);
             System.out.println("Output:");
-            System.out.println("throws Exception");
+            System.out.println(e.getMessage());
+
+
+
         }
 
         return result;
@@ -149,31 +151,20 @@ public class Main {
     }
 
     //Метод анализа операндов и действия с ними
-    public static String numberAction (String num1, String num2){
+    public static String numberAction (String num1, String num2) throws Exception {
         Operand operand = new Operand();
         String result = null;
         try {
             operand.num1.rNum = RomNumerals.valueOf(num1);
-            try{
-                operand.num2.rNum = RomNumerals.valueOf(num2);
-                result = operand.romArithmeticOperation();
-            } catch (Exception e){
-                System.out.println("Output:");
-                System.out.println("throws Exception");
-            }
-        } catch (Exception e2){
+            operand.num2.rNum = RomNumerals.valueOf(num2);
+            result = operand.romArithmeticOperation();
+        } catch (Exception e){
             try {
                 operand.num1.num = Integer.parseInt(num1);
-                try {
-                    operand.num2.num = Integer.parseInt(num2);
-                    result = operand.arabArithmeticOperation();
-                } catch (Exception e3){
-                    System.out.println("Output:");
-                    System.out.println("throws Exception");
-                }
-            }catch (IllegalArgumentException e3){
-                System.out.println("Output:");
-                System.out.println("throws Exception");
+                operand.num2.num = Integer.parseInt(num2);
+                result = operand.arabArithmeticOperation();
+            }catch (Exception e1){
+              throw new Exception();
             }
         }
 
